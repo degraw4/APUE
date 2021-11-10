@@ -11,6 +11,7 @@
 #include <pthread.h>
 
 // 非root发送kill，接收者的 实际用户ID or 有效用户ID 要等于发送者的 实际用户ID or 有效用户ID
+// alarm返回值：0或以前alarm剩余秒数
 
 int main(int argc, char** argv)
 {

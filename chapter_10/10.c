@@ -13,7 +13,10 @@
 
 // 实现system函数
 // system: a.out -> bash -> cmmand
-// 要对调用者(a.out中的父进程)忽略SIGITN和SIGQUIT， 阻塞SIGCHLD
+// 为什么要阻塞SIGCHLD：
+    // 为了防止其他程序(main除了会调用system还会使用其他程序)设置了SIGCHLD信号处理函数
+    // 如果其他程序设置了SIGCHLD信号处理函数，在waitpid等待子程序的返回前，要去处理SIGCHLD信号处理程序
+    // 如果阻塞了该信号，就不会去处理该信号处理程序，防止多余信息在system()中的出现
 
 int system(const char* command){
     if(command == NULL)
@@ -36,7 +39,7 @@ int system(const char* command){
         exit(127);  // if error
     }
     else{
-        waitpid(pid, 0, 0);
+        waitpid(pid, 0, 0); // waitpid并不是靠SIGCHLD工作的
     }
     
     signal(SIGINT, SIG_DFL);

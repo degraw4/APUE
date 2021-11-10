@@ -13,6 +13,8 @@
 // 当某个信号被屏蔽且pending，若使用sigprocmask解除屏蔽
 // 进程先处理该信号，然后进行sigprocmask的返回
 
+// sigprocmask和sigsuspend都是先解除对某信号的屏蔽，然后跳转到该信号的处理函数(如果捕捉到的话)，处理完才返回sigprocmask和sigsuspend
+
 void handler(){
     printf("catch\n");
     signal(SIGINT, SIG_DFL);

@@ -11,9 +11,10 @@
 #include <pthread.h>
 #include <setjmp.h>
 
-// 使用pause实现sleep
+// 使用alarm和pause实现sleep
 // 为了避免alarm的返回和pause形成竞争导致pause永久阻塞，使用longjmp避免返回后遇到pause
 // 但是SIGALRM可能中断了其他信号处理程序，longjmp直接返回导致该程序未运行结束
+// 可以用sigsuspend，即避免了pause阻塞，又避免了非局部跳转打断信号处理函数
 
 static jmp_buf buffer;
 
