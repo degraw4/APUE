@@ -14,7 +14,16 @@
 
 int main(int argc, char** argv)
 {
-    
+    pthread_mutex_t hashlock, itemlock;
+    pthread_mutex_init(&hashlock, NULL);
+    pthread_mutex_init(&itemlock, NULL);
+
+    pthread_mutex_lock(&hashlock);
+    // do something ablout hashtable...
+    pthread_mutex_lock(&itemlock);
+    pthread_mutex_unlock(&hashlock);
+    // do something ablout item...
+    pthread_mutex_unlock(&itemlock);
 
     return 0;
 }
