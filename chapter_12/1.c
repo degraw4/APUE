@@ -13,7 +13,7 @@
 int main(int argc, char** argv)
 {
     pthread_mutex_t mutex;
-    pthread_mutexattr_t attr;
+    pthread_mutexattr_t attr = PTHREAD_MUTEX_INITIALIZER;
     int shared;
     pthread_mutexattr_getpshared(&attr, &shared);
     if(shared == PTHREAD_PROCESS_SHARED){
