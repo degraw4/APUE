@@ -22,7 +22,7 @@ int main(int argc, char** argv)
     // 对于已经打开的fd，用fcntl设置文件属性
         // 文件属性/FL：O_RDWR，O_APPEND，O_NONBLOCK
         // 文件描述符属性/FD：FD_CLOEXEC
-    int val  =fcntl(fd, F_GETFL, 0);
+    int val = fcntl(fd, F_GETFL, 0);
     val |= O_NONBLOCK;
     fcntl(fd, F_SETFL, val);
 

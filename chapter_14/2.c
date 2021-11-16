@@ -13,6 +13,10 @@
 #include <errno.h>
 
 // 记录锁
+// 记录锁与文件和进程相关
+    // 进程终止，该进程的锁全部释放
+    // 文件描述符关闭，该进程在改文件描述符上的锁全部释放(但改描述符指向的文件由其他进程设置的锁不会释放)
+        // 即在一个进程内，记录锁是和文件相关的，不论该文件open或者dup产生了几个描述符
 
 #define read_lock(fd, offset, whence, len)      lock_reg(fd, F_SETLK, F_RDLCK, (offset), (whence), (len))
 #define readw_lock(fd, offset, whence, len)     lock_reg(fd, F_SETLKW, F_RDLCK, (offset), (whence), (len))
