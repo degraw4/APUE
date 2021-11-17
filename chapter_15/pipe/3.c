@@ -17,13 +17,9 @@
 int main(int argc, char** argv)
 {
     int fd[2];
-    fd[0] = dup(0);
-    fd[1] = dup(0);
-    printf("fd[0] is %d\n", fd[0]);
-    printf("fd[1] is %d\n", fd[1]);
     pipe(fd);
-    printf("fd[0] is %d\n", fd[0]);
-    printf("fd[1] is %d\n", fd[1]);
+    dup2(STDIN_FILENO, fd[0]);
+    dup2(STDOUT_FILENO, fd[1]);
 
     while(1);
 
